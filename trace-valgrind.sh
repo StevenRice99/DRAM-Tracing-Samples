@@ -1,12 +1,12 @@
 #!/bin/bash
 # Trace using Valgrind.
-TEMP_FILE="${HOME}/DRAM-Tracing-Samples/temp_trace.log"
+TEMP_FILE="${HOME}/DRAM-Tracing-Samples/temp-trace.log"
 OUTPUT_FILE="${HOME}/DRAM-Tracing-Samples/trace-valgrind.txt"
 TARGET_CMD="/usr/bin/python3 ${HOME}/DRAM-Tracing-Samples/main.py"
 # Use getopts to parse command-line flags and their values.
 while getopts 'p:t:o:s:' flag; do
   case "${flag}" in
-    # -t: The pin tracer program executable.
+    # -t: The temporary file path.
     t) TEMP_FILE="${OPTARG}" ;;
     # -o: The output trace file path.
     o) OUTPUT_FILE="${OPTARG}" ;;
@@ -33,9 +33,6 @@ echo "--------------------------------------------------"
 # Trace memory using Valgrind.
 valgrind --tool=lackey --trace-mem=yes --log-file=${TEMP_FILE} ${TARGET_CMD}
 # Copy into a format DRAMSys can read.
-echo "--------------------------------------------------"
-echo "First 10 lines of temporary file:"
-head ${TEMP_FILE}
 /usr/bin/python3 ~/DRAM-Tracing-Samples/trace_valgrind.py ${TEMP_FILE} ${OUTPUT_FILE}
 end_seconds=$(date +%s)
 echo "- End Time:       $(date)"
