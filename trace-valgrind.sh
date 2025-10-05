@@ -1,7 +1,7 @@
 #!/bin/bash
 # Trace using Valgrind.
 TEMP_FILE="${HOME}/DRAM-Tracing-Samples/temp-trace.log"
-OUTPUT_FILE="${HOME}/DRAM-Tracing-Samples/trace-valgrind.txt"
+OUTPUT_FILE="${HOME}/DRAM-Tracing-Samples/trace-valgrind.stl"
 TARGET_CMD="/usr/bin/python3 ${HOME}/DRAM-Tracing-Samples/main.py"
 # Use getopts to parse command-line flags and their values.
 while getopts 'p:t:o:s:' flag; do

@@ -4,7 +4,7 @@
 PIN_EXE="${HOME}/pin/pin"
 PIN_TOOL="${HOME}/pin/source/tools/SimpleExamples/obj-intel64/pinatrace.so"
 TEMP_FILE="${HOME}/DRAM-Tracing-Samples/temp-trace.txt"
-OUTPUT_FILE="${HOME}/DRAM-Tracing-Samples/trace-pin.txt"
+OUTPUT_FILE="${HOME}/DRAM-Tracing-Samples/trace-pin.stl"
 TARGET_CMD="/usr/bin/python3 ${HOME}/DRAM-Tracing-Samples/main.py"
 # Use getopts to parse command-line flags and their values.
 while getopts 'p:t:o:s:' flag; do
