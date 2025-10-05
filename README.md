@@ -33,3 +33,7 @@ Helps format the results from ``trace-pin.sh``.
 ## main.py
 
 Simple placeholder script which simply prints ``Hello World!`` to the console.
+
+# Sample Configuration Files
+
+``hello-world-1866.json`` and ``hello-world-2400.json`` provide sample bases to run against the captured traces.
