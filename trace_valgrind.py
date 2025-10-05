@@ -23,14 +23,14 @@ try:
                 # Convert Lackey operations to DRAMSys format.
                 if op_type == 'L':
                     # Load is a Read.
-                    outfile.write(f"{num}\tread\t0x{address}\n")
+                    outfile.write(f"{num}:\tread\t0x{address}\n")
                 elif op_type == 'S':
                     # Store is a Write.
-                    outfile.write(f"{num}\twrite\t0x{address}\n")
+                    outfile.write(f"{num}:\twrite\t0x{address}\n")
                 elif op_type == 'M':
                     # Modify is a Read followed by a Write.
-                    outfile.write(f"{num}\tread\t0x{address}\n")
-                    outfile.write(f"{num}\twrite\t0x{address}\n")
+                    outfile.write(f"{num}:\tread\t0x{address}\n")
+                    outfile.write(f"{num}:\twrite\t0x{address}\n")
                 num += 1
     print("Processing complete!")
 except FileNotFoundError:

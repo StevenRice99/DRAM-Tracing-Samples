@@ -30,10 +30,10 @@ try:
                 # operation to the output file.
                 if op_type == 'R':
                     # Read operation.
-                    outfile.write(f"{num}\tread\t0x{address}\n")
+                    outfile.write(f"{num}:\tread\t0x{address}\n")
                 elif op_type == 'W':
                     # Write operation.
-                    outfile.write(f"{num}\twrite\t0x{address}\n")
+                    outfile.write(f"{num}:\twrite\t0x{address}\n")
                 num += 1
 except FileNotFoundError:
     print(f"Error: Input file '{input_filename}' not found.")
