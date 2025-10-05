@@ -9,7 +9,7 @@
             {
                 "type": "player",
                 "clkMhz": 200,
-                "name": "traces/trace_valgrind.txt"
+                "name": "traces/trace_valgrind.stl"
             }
         ]
     }
