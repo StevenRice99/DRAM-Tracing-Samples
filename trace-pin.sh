@@ -1,13 +1,11 @@
 #!/bin/bash
-# Trace  using Intel pin.
+# Trace using Intel pin.
 # Default paths.
 PIN_EXE="${HOME}/pin/pin"
 PIN_TOOL="${HOME}/pin/source/tools/SimpleExamples/obj-intel64/pinatrace.so"
 OUTPUT_FILE="${HOME}/DRAM-Tracing-Samples/trace-pin.txt"
-# The command to be traced, including any arguments.
 TARGET_CMD="/usr/bin/python3 ${HOME}/DRAM-Tracing-Samples/main.py"
 # Use getopts to parse command-line flags and their values.
-# The colon after each letter indicates that the flag requires an argument.
 while getopts 'p:t:o:s:' flag; do
   case "${flag}" in
     # -p: The "pin" executable.
@@ -25,6 +23,8 @@ while getopts 'p:t:o:s:' flag; do
       ;;
   esac
 done
+# Remove the old trace file if needed.
+rm -f ${OUTPUT_FILE}
 # Print details about the run.
 echo "Running Intel Pin with the following configuration:"
 echo "- Pin Executable: ${PIN_EXE}"
@@ -33,7 +33,7 @@ echo "- Output File:    ${OUTPUT_FILE}"
 echo "- Target Command: ${TARGET_CMD}"
 start_seconds=$(date +%s)
 echo "- Start Time:     $(date)"
-echo "---------------------------------------------"
+echo "---------------------------------------------------"
 # Execute the final command.
 # TARGET_CMD is intentionally not quoted to allow the shell to correctly.
 ${PIN_EXE} -t ${PIN_TOOL} -o ${OUTPUT_FILE} -- ${TARGET_CMD}
@@ -41,3 +41,6 @@ end_seconds=$(date +%s)
 echo "- End Time:       $(date)"
 elapsed_seconds=$((end_seconds - start_seconds))
 echo "- Elapsed Time:   $elapsed_seconds seconds"
+echo "---------------------------------------------------"
+echo "First 10 lines:"
+head ${OUTPUT_FILE}

@@ -12,7 +12,6 @@ if len(sys.argv) != 3:
     sys.exit(1)
 input_filename = sys.argv[1]
 output_filename = sys.argv[2]
-print(f"Processing '{input_filename}' -> '{output_filename}'...")
 try:
     with open(input_filename, 'r') as infile, open(output_filename, 'w') as outfile:
         for line in infile:
