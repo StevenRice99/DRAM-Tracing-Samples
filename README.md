@@ -18,6 +18,17 @@ Trace memory using [Intel Pin](https://www.intel.com/content/www/us/en/developer
 - ``-o`` - The output trace file path. Defaults to ``${HOME}/DRAM-Tracing-Samples/trace-pin.stl``.
 - ``-s`` - The target command to be traced. Defaults to ``/usr/bin/python3 ${HOME}/DRAM-Tracing-Samples/main.py``.
 
+# synthetic.py
+
+Script to generate very basic synthetic data. The synthetic data this produces is very basic and entirely random. You may want to use this as a base and expand it to have more systematic reads and writes at times. For instance, reading and writing to sequential addresses to simulate array reads and writes, rather than entirely random accesses.
+
+- ``-e`` or `--entries` - DESCRIPTION. Defaults to ``1000``.
+- ``-m`` or `--megabytes` - DESCRIPTION. Defaults to ``4096``.
+- ``-r`` or `--read` - DESCRIPTION. Defaults to ``0.9``.
+- ``-o`` or `--output` - DESCRIPTION. Defaults to ``synthetic.stl``.
+- ``-s`` or `--seed` - DESCRIPTION. Defaults to ``42``.
+- ``-l`` or `--level` - DESCRIPTION. Defaults to ``INFO``.
+
 # Helpers
 
 These files do not need to be called on their own but help the bash scripts.

@@ -1,3 +1,22 @@
-trace.log
-trace-valgrind.txt
-trace-pin.txt
+# Common Python Cache.
+__pycache__
+
+# Common Virtual Environment Folders.
+venv
+.venv
+
+# JetBrains PyCharm Cache.
+.idea
+
+# VS Code Cache.
+.vscode
+
+# Cadence Cache.
+.cadence
+
+# Ignore generated files.
+temp-trace.log
+temp-trace.txt
+trace-valgrind.stl
+trace-pin.stl
+synthetic.stl
