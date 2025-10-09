@@ -4,12 +4,12 @@
         "mcconfig": "mcconfig/fr_fcfs.json",
         "memspec": "memspec/JEDEC_4Gb_DDR4-2400_8bit_A.json",
         "simconfig": "simconfig/example.json",
-        "simulationid": "hello_world_2400",
+        "simulationid": "synthetic_2400",
         "tracesetup": [
             {
                 "type": "player",
                 "clkMhz": 200,
-                "name": "traces/trace-valgrind.stl"
+                "name": "traces/synthetic.stl"
             }
         ]
     }
