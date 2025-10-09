@@ -22,12 +22,12 @@ Trace memory using [Intel Pin](https://www.intel.com/content/www/us/en/developer
 
 Script to generate very basic synthetic data. The synthetic data this produces is very basic and entirely random. You may want to use this as a base and expand it to have more systematic reads and writes at times. For instance, reading and writing to sequential addresses to simulate array reads and writes, rather than entirely random accesses.
 
-- ``-e`` or `--entries` - DESCRIPTION. Defaults to ``1000``.
-- ``-m`` or `--megabytes` - DESCRIPTION. Defaults to ``4096``.
-- ``-r`` or `--read` - DESCRIPTION. Defaults to ``0.9``.
-- ``-o`` or `--output` - DESCRIPTION. Defaults to ``synthetic.stl``.
-- ``-s`` or `--seed` - DESCRIPTION. Defaults to ``42``.
-- ``-l`` or `--level` - DESCRIPTION. Defaults to ``INFO``.
+- ``-e`` or `--entries` - Number of lines to generate. Defaults to ``1000``.
+- ``-m`` or `--megabytes` - Megabytes to generate up to. Defaults to ``4096``.
+- ``-r`` or `--read` - Percentage of operations which are reads. Defaults to ``0.9``.
+- ``-o`` or `--output` - Output file path. Defaults to ``synthetic.stl``.
+- ``-s`` or `--seed` - Random generation seed. Defaults to ``42``.
+- ``-l`` or `--level` - Logging level. Defaults to ``INFO``.
 
 # Helpers
 
