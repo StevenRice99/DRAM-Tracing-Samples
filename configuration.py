@@ -137,6 +137,7 @@ class Configuration:
                         results[instance_id] = ps
                         count += 1
                     else:
+                        logging.error(f"Failed to extract the execution time from '{dram_sys}' with '{path}'.")
                         results[instance_id] = float("inf")
             except Exception as e:
                 logging.error(f"Failed to execute '{dram_sys}' with '{path}': {e}")

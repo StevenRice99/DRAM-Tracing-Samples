@@ -150,22 +150,18 @@ def selection(
         population: list[Individual]
 ) -> tuple[Individual, Individual]:
     """
-    Selects two parent individuals from the population. This implementation uses a fitness-proportional selection where
-    individuals with higher fitness have a higher chance of being selected.
-    :param population: The population of members.
+    Selects two parent individuals from the population with better-ranking members being more likely.
     :type population: list[Individual]
     :return: The two parents for crossover.
     :rtype: tuple[Individual, Individual]
     """
-    # Create a weighted list based on fitness scores.
-    fitness_sum = sum(individual.fitness for individual in population)
-    # Handle the case where the sum of fitness is zero to avoid division errors.
-    if fitness_sum == 0:
-        # If all individuals have a fitness of 0, select any two at random.
-        return random.sample(population, 2)
-    # Select parents based on their fitness weights.
-    a = random.choices(population, weights=[ind.fitness for ind in population], k=1)[0]
-    b = random.choices(population, weights=[ind.fitness for ind in population], k=1)[0]
+    population_size = len(population)
+    # Create a list of weights where the weight is higher for lower indices.
+    # For a population of size n, the weights will be [n, n-1, ..., 1].
+    weights = list(range(population_size, 0, -1))
+    # Select parents based on their index-based weights.
+    a = random.choices(population, weights=weights, k=1)[0]
+    b = random.choices(population, weights=weights, k=1)[0]
     return a, b
 
 
