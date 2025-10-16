@@ -139,6 +139,8 @@ def get_fitness(
         HISTORY[address_mapping][mc_config] = {}
     if mem_spec not in HISTORY[address_mapping][mc_config]:
         HISTORY[address_mapping][mc_config][mem_spec] = {}
+    if sim_config not in HISTORY[address_mapping][mc_config][mem_spec]:
+        HISTORY[address_mapping][mc_config][mem_spec][sim_config] = {}
     HISTORY[address_mapping][mc_config][mem_spec][sim_config][clk_mhz] = result
     # Return the new result.
     return result
