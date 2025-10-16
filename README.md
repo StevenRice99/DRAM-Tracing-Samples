@@ -29,9 +29,23 @@ Script to generate very basic synthetic data. The synthetic data this produces i
 - ``-s`` or `--seed` - Random generation seed. Defaults to ``42``.
 - ``-l`` or `--level` - Logging level. Defaults to ``INFO``.
 
+# genetic_algorithm.py
+
+A very basic genetic algorithm implementation you could use as a starting point. **Note in its current form, you are unlikely to converge to anything!** There are too many component options which are not compatible with each other, so it is likely you will go the entire genetic algorithm run without creating a single valid member. This is an area you can try to improve with your own unique ideas and methods.
+
+- ``-l`` or `--level` - Logging level. Defaults to ``INFO``.
+
 # Helpers
 
-These files do not need to be called on their own but help the bash scripts.
+These files do not need to be called on their own but help the bash scripts or other Python scripts.
+
+## common.py
+
+Common data between other Python scripts.
+
+## configuration.py
+
+Helper to execute dynamically created configuration files.
 
 ## trace_valgrind.py
 
