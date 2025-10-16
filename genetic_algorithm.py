@@ -133,7 +133,7 @@ def get_fitness(
         return HISTORY[address_mapping][mc_config][mem_spec][sim_config][clk_mhz]
     # If it wasn't, get it now.
     c = Configuration(f"genetic-algorithm", address_mapping, mc_config, mem_spec, sim_config, clk_mhz)
-    result, _, _ = c.run(traces, False, configs_root, dram_sys)
+    result, _, _ = c.run(traces, True, configs_root, dram_sys)
     # Cache it for next time.
     if address_mapping not in HISTORY:
         HISTORY[address_mapping] = {}
