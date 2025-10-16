@@ -6,7 +6,9 @@ import random
 from common import CONFIGS, DRAM_SYS, get_files, HOME, LEVEL, logs, OUTPUT_FOLDER
 from configuration import Configuration
 
-# Load all existing mappings. You may want to limit these in some way.
+# Load all existing mappings. You will want to limit these in some way.
+# Doing it this way, most configurations are not compatible and 87,234 possible combinations!
+# You will need to do some kind of filtering on your own, whether manual or systematically.
 ADDRESS_MAPPINGS = get_files(os.path.join(CONFIGS, "addressmapping"))
 MC_CONFIGS = get_files(os.path.join(CONFIGS, "mcconfig"))
 MEM_SPECS = get_files(os.path.join(CONFIGS, "memspec"))
@@ -150,19 +152,12 @@ def selection(
         population: list[Individual]
 ) -> tuple[Individual, Individual]:
     """
-    Selects two parent individuals from the population with better-ranking members being more likely.
+    Selects two parent individuals randomly.
     :type population: list[Individual]
     :return: The two parents for crossover.
     :rtype: tuple[Individual, Individual]
     """
-    population_size = len(population)
-    # Create a list of weights where the weight is higher for lower indices.
-    # For a population of size n, the weights will be [n, n-1, ..., 1].
-    weights = list(range(population_size, 0, -1))
-    # Select parents based on their index-based weights.
-    a = random.choices(population, weights=weights, k=1)[0]
-    b = random.choices(population, weights=weights, k=1)[0]
-    return a, b
+    return random.choice(population), random.choice(population)
 
 
 def crossover(
@@ -225,6 +220,8 @@ def main() -> None:
     :return: Nothing.
     :rtype: None
     """
+    total = len(ADDRESS_MAPPINGS) * len(MC_CONFIGS) * len(MEM_SPECS) * len(SIM_CONFIGS) * len(CLK_SPEEDS)
+    logging.info(f"{total} configurations.")
     # Create the initial population.
     population = [Individual.create_random() for _ in range(POPULATION_SIZE)]
     for generation in range(max(GENERATIONS, 1)):
