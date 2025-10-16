@@ -73,4 +73,5 @@ def get_files(
     :return: All file paths in the directory.
     :rtype: list[str]
     """
-    return [os.path.join(directory, entry.name) for entry in Path(directory).iterdir() if entry.is_file()]
+    local = os.path.basename(directory)
+    return [os.path.join(local, entry.name) for entry in Path(directory).iterdir() if entry.is_file()]
