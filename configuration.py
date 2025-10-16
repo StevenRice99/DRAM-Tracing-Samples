@@ -35,7 +35,7 @@ class Configuration:
         :param trace: The trace.
         :type trace: str
         """
-        self.simulation_id = simulation_id
+        self.simulation_id = simulation_id.replace(".stl", "")
         self.address_mapping = address_mapping
         self.mc_config = mc_config
         self.mem_spec = mem_spec
@@ -48,7 +48,7 @@ class Configuration:
                 "mcconfig": mc_config,
                 "memspec": mem_spec,
                 "simconfig": sim_config,
-                "simulationid": simulation_id,
+                "simulationid": self.simulation_id,
                 "tracesetup": [
                     {
                         "type": "player",
@@ -106,7 +106,7 @@ class Configuration:
         # Loop through every trace that was requested to run.
         for trace in traces:
             # Set values for this instance.
-            instance_id = f"{self.simulation_id}-{os.path.basename(trace)}"
+            instance_id = f"{self.simulation_id}-{os.path.basename(trace).replace('.stl', '')}"
             self.data["simulation"]["simulationid"] = instance_id
             self.data["simulation"]["tracesetup"][0]["name"] = trace
             # Write the file so it can be run with DRAMSys.
