@@ -140,7 +140,7 @@ class Configuration:
                         logging.error(f"Failed to extract the execution time from '{dram_sys}' with '{path}'.")
                         results[instance_id] = float("inf")
             except Exception as e:
-                logging.error(f"Failed to execute '{dram_sys}' with '{path}': {e}")
+                logging.error(f"Failed to execute '{dram_sys}' with '{path}': {e} | Potentially incompatible parts.")
                 results[instance_id] = float("inf")
             # Remove the file if we should.
             if cleanup:
