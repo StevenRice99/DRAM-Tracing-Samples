@@ -1,58 +1,17 @@
 import argparse
 import logging
+import os
 import random
 
-
-# Number of lines to generate.
-ENTRIES = 1000
-# Megabytes to generate up to.
-MEGABYTES = 4096
-# Percentage of operations which are reads.
-READ = 0.9
-# Output file path.
-OUTPUT = "synthetic.stl"
-# Random generation seed.
-SEED = 42
-# Logging level.
-LEVEL = "INFO"
+from common import ENTRIES, LEVEL, logs, MEGABYTES, OUTPUT, OUTPUT_FOLDER, READ, SEED
 
 
-def logs(
-        level: str = LEVEL
-) -> None:
-    """
-    Configure logging.
-    :param level: Logging level.
-    :type level: str
-    :return: Nothing.
-    :rtype: None
-    """
-    # Configure the logging.
-    level = level.upper()
-    if level == "CRITICAL" or level == "FATAL":
-        level = logging.CRITICAL
-    elif level == "ERROR":
-        level = logging.ERROR
-    elif level == "WARNING" or level == "WARN":
-        level = logging.WARNING
-    elif level == "INFO":
-        level = logging.INFO
-    elif level == "DEBUG":
-        level = logging.DEBUG
-    else:
-        level = logging.NOTSET
-    logging.basicConfig(level=level, format="%(asctime)s | %(levelname)s | %(message)s")
-    logging.debug(f"Logging level set to '{level}'.")
-    return None
-
-
-def main(
+def generate_synthetic(
         entries: int = ENTRIES,
         megabytes: int = MEGABYTES,
         read: float = READ,
         output: str = OUTPUT,
-        seed: int = SEED,
-        level: str = LEVEL
+        seed: int = SEED
 ) -> bool:
     """
     Perform basic synthetic generation of read and write operations.
@@ -66,12 +25,9 @@ def main(
     :type output: str
     :param seed: Random generation seed.
     :type seed: int
-    :param level: Logging level.
-    :type level: str
     :return: If the file was generated successfully.
     :rtype: bool
     """
-    logs(level)
     # Ensure all values are valid.
     entries = max(entries, 1)
     megabytes = max(megabytes, 1)
@@ -96,6 +52,49 @@ def main(
     return True
 
 
+def generate_synthetics(
+        entries: int | list[int] = ENTRIES,
+        megabytes: int | list[int] = MEGABYTES,
+        read: float | list[float] = READ,
+        output: str = OUTPUT_FOLDER,
+        seed: int | list[int] = SEED
+) -> list[str]:
+    """
+    Generate multiple synthetic traces.
+    :param entries: Numbers of lines to generate.
+    :type entries: int | list[int]
+    :param megabytes: Megabytes to generate up to.
+    :type megabytes: int | list[int]
+    :param read: Percentages of operations which are reads.
+    :type read: float | list[float]
+    :param output: Output folder path.
+    :type output: str
+    :param seed: Random generation seeds.
+    :type seed: int | list[int]
+    :return: The path of the successfully generated files.
+    :rtype: list[str]
+    """
+    if isinstance(entries, int):
+        entries = [entries]
+    if isinstance(megabytes, int):
+        megabytes = [megabytes]
+    if isinstance(read, float):
+        read = [read]
+    if isinstance(seed, int):
+        seed = [seed]
+    paths = []
+    os.makedirs(output)
+    for e in entries:
+        for m in megabytes:
+            for r in read:
+                r_s = str(r).replace(".", "")
+                for s in seed:
+                    path = os.path.join(output, f"{e}-{m}-{r_s}-{s}.stl")
+                    if generate_synthetic(e, m, r, path, s):
+                        paths.append(path)
+    return paths
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Synthetic Memory Trace Generator")
     parser.add_argument("-e", "--entries", type=int, default=ENTRIES, help="Number of lines to generate.")
@@ -105,4 +104,5 @@ if __name__ == "__main__":
     parser.add_argument("-s", "--seed", type=int, default=SEED, help="Random generation seed.")
     parser.add_argument("-l", "--level", type=str, default=LEVEL, help="Logging level.")
     args = parser.parse_args()
-    main(args.entries, args.megabytes, args.read, args.output, args.seed, args.level)
+    logs(args.level)
+    generate_synthetic(args.entries, args.megabytes, args.read, args.output, args.seed)
